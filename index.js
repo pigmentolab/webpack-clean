@@ -1,14 +1,15 @@
 /**
- * Created by AlexCD on 07/09/2015.
+ * Created by Pigmento in 18/01/2018.
  */
 
 const path = require('path');
+const glob = require('glob');
 const join = path.join;
 const fs = require('fs-extra');
 const logger = require('winston-color');
 const fileExists = require('file-exists');
 
-const pluginName = 'WebpackClean';
+const pluginName = 'WebpackGlobClean';
 
 const INFO = 'info';
 const WARN = 'warn';
@@ -16,7 +17,7 @@ const ERROR = 'error';
 
 function log (type, msg) {
   logger[type](`${pluginName} - ${msg}`);
-};
+}
 
 function throwErr (msg, err) {
   throw new Error(msg, err);
@@ -26,20 +27,16 @@ function getFileList (files) {
   if (!files) {
     return [];
   }
-  return (Array.isArray(files)) ? files : new Array(files);
-};
-
-function addMapExtension (file) {
-  return `${file}.map`;
-};
+  return Array.isArray(files) ? files : new Array(files);
+}
 
 function getContext (basePath) {
   return basePath || path.dirname(module.parent.filename);
-};
+}
 
 function joinFilePath (context, file) {
   return join(context, file);
-};
+}
 
 function removeFile (file) {
   const self = this;
@@ -55,7 +52,7 @@ function removeFile (file) {
   });
 
   return promise;
-};
+}
 
 function isExistingFile (filePath) {
   return fileExists(filePath)
@@ -67,41 +64,39 @@ function isExistingFile (filePath) {
       }
     })
     .catch(err => throwErr(pluginName, err));
-};
+}
 
-function checkFiles (files, context, removeMaps) {
+function checkFiles (files, context) {
   let fileExistsPromises = [];
 
   // check if each file exists
   files.forEach(file => {
-    const filePath = joinFilePath(context, file);
-    const fileMapPath = addMapExtension(filePath);
-
-    // add to list the file to be removed
-    fileExistsPromises.push(isExistingFile(filePath));
-    // add to list the map file to be removed
-    if (removeMaps) {
-      fileExistsPromises.push(isExistingFile(fileMapPath));
-    }
+    let filePaths = glob.sync(joinFilePath(context, file)).map(entry => entry);
+    filePaths.forEach(filePath => {
+      // add to list the file to be removed
+      fileExistsPromises.push(isExistingFile(filePath));
+    });
   });
 
   return fileExistsPromises;
-};
+}
 
 function doRemove () {
   const self = this;
 
-  Promise.all(checkFiles(self.files, self.context, self.removeMaps))
+  Promise.all(checkFiles(self.files, self.context))
     .then(removalPromises => Promise.all(removalPromises))
-    .then(() => { log(INFO, 'DONE'); })
+    .then(() => {
+      log(INFO, 'DONE');
+    })
     .catch(err => throwErr(pluginName, err));
 }
 
 // allow the options object to be omitted in the constructor function
-function WebpackClean (files, {basePath = null, removeMaps = false, forceDelete = false} = {}) {
+function WebpackClean (files, { basePath = null, verbose = false, forceDelete = false } = {}) {
   this.files = getFileList(files);
   this.context = getContext(basePath); // get webpack roots
-  this.removeMaps = removeMaps;
+  this.verbose = verbose;
   this.forceDelete = forceDelete;
 }
 

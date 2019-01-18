@@ -1,6 +1,6 @@
 {
-  "name": "webpack-clean",
-  "version": "1.2.3",
+  "name": "webpack-glob-clean",
+  "version": "1.3.0",
   "description": "A webpack plugin to clean specified files after build",
   "main": "index.js",
   "scripts": {
@@ -10,33 +10,33 @@
   },
   "dependencies": {
     "file-exists": "5.0.1",
-    "fs-extra": "5.0.0",
+    "fs-extra": "7.0.1",
     "winston-color": "1.0.0"
   },
   "devDependencies": {
-    "ava": "0.25.0",
-    "eslint": "4.17.0",
-    "eslint-config-standard": "11.0.0-beta.0",
-    "eslint-plugin-import": "2.8.0",
-    "eslint-plugin-json": "1.2.0",
-    "eslint-plugin-node": "6.0.0",
-    "eslint-plugin-promise": "3.6.0",
-    "eslint-plugin-standard": "3.0.1",
-    "rewire": "3.0.2"
+    "ava": "1.1.0",
+    "eslint": "5.12.0",
+    "eslint-config-standard": "12.0.0",
+    "eslint-plugin-import": "2.14.0",
+    "eslint-plugin-json": "1.3.2",
+    "eslint-plugin-node": "8.0.1",
+    "eslint-plugin-promise": "4.0.1",
+    "eslint-plugin-standard": "4.0.0",
+    "rewire": "4.0.1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/allexcd/webpack-clean.git"
+    "url": "git+https://github.com/pigmentolab/webpack-clean.git"
   },
   "keywords": [
     "webpack",
     "clean",
     "build"
   ],
-  "author": "AlexCD <alexandru.cd@gmail.com> (www.alexcd.eu)",
+  "author": "Pigmento <info@pigmentolab.com> (pigmentolab.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/allexcd/webpack-clean/issues"
+    "url": "https://github.com/pigmentolab/webpack-clean/issues"
   },
-  "homepage": "https://github.com/allexcd/webpack-clean#readme"
+  "homepage": "https://github.com/pigmentolab/webpack-clean#readme"
 }

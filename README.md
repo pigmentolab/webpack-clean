@@ -1,19 +1,19 @@
-[![GitHub stars](https://img.shields.io/github/stars/allexcd/webpack-clean.svg?style=flat-square)](https://github.com/allexcd/webpack-clean/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/allexcd/webpack-clean.svg?style=flat-square)](https://github.com/allexcd/webpack-clean/network)
-[![GitHub issues](https://img.shields.io/github/issues/allexcd/webpack-clean.svg?style=flat-square)](https://github.com/allexcd/webpack-clean/issues)
-[![GitHub issues closed](https://img.shields.io/github/issues-closed/allexcd/webpack-clean.svg?style=flat-square)](https://github.com/allexcd/webpack-clean/issues?q=is%3Aissue+is%3Aclosed)
+[![GitHub stars](https://img.shields.io/github/stars/pigmentolab/webpack-clean.svg?style=flat-square)](https://github.com/pigmentolab/webpack-clean/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/pigmentolab/webpack-clean.svg?style=flat-square)](https://github.com/pigmentolab/webpack-clean/network)
+[![GitHub issues](https://img.shields.io/github/issues/pigmentolab/webpack-clean.svg?style=flat-square)](https://github.com/pigmentolab/webpack-clean/issues)
+[![GitHub issues closed](https://img.shields.io/github/issues-closed/pigmentolab/webpack-clean.svg?style=flat-square)](https://github.com/pigmentolab/webpack-clean/issues?q=is%3Aissue+is%3Aclosed)
 
-[![Github release date](https://img.shields.io/github/release-date/allexcd/webpack-clean.svg?style=flat-square)](https://github.com/allexcd/webpack-clean/releases)
-[![Github release version](https://img.shields.io/github/release/allexcd/webpack-clean.svg?style=flat-square)](https://github.com/allexcd/webpack-clean/releases)
+[![Github release date](https://img.shields.io/github/release-date/pigmentolab/webpack-clean.svg?style=flat-square)](https://github.com/pigmentolab/webpack-clean/releases)
+[![Github release version](https://img.shields.io/github/release/pigmentolab/webpack-clean.svg?style=flat-square)](https://github.com/pigmentolab/webpack-clean/releases)
 [![npm release version](https://img.shields.io/npm/v/webpack-clean.svg?style=flat-square)](https://nodei.co/npm/webpack-clean)
-[![Github commits since last release](https://img.shields.io/github/commits-since/allexcd/webpack-clean/latest.svg?style=flat-square)](https://www.npmjs.com/package/webpack-clean)
+[![Github commits since last release](https://img.shields.io/github/commits-since/pigmentolab/webpack-clean/latest.svg?style=flat-square)](https://www.npmjs.com/package/webpack-clean)
 
 [![npm](https://nodei.co/npm/webpack-clean.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/webpack-clean)
 
 [![npm monthly downloads](https://img.shields.io/npm/dm/webpack-clean.svg?style=flat-square)](https://www.npmjs.com/package/webpack-clean)
 [![npm yearly downloads](https://img.shields.io/npm/dy/webpack-clean.svg?style=flat-square)](https://www.npmjs.com/package/webpack-clean)
 
-[![license](https://img.shields.io/github/license/allexcd/webpack-clean.svg?style=flat-square)](https://github.com/allexcd/webpack-clean/blob/master/LICENSE)
+[![license](https://img.shields.io/github/license/pigmentolab/webpack-clean.svg?style=flat-square)](https://github.com/pigmentolab/webpack-clean/blob/master/LICENSE)
 
 ## Webpack Clean
 
@@ -24,8 +24,8 @@ A webpack plugin to clean specified files after build
 Install the plugin:
 
 ```
-npm install webpack-clean --save-dev
-yarn add webpack-clean --dev
+npm install webpack-glob-clean --save-dev
+yarn add webpack-glob-clean --dev
 ```
 
 
@@ -42,7 +42,7 @@ new WebpackCleanPlugin(files: array|string, [ { [basePath: string], [removeMaps:
 ### Usage
 
 ```javascript
-var WebpackCleanPlugin = require('webpack-clean');
+var WebpackCleanPlugin = require('webpack-glob-clean');
 
 module.exports = {
     context: path.join(__dirname, './'),
@@ -82,16 +82,7 @@ module.exports = {
         new WebpackCleanPlugin([
             'fileA.js',
             'fileB.js'
-        ], {basePath: path.join(__dirname, 'dist'), removeMaps: true)}
-    ]
-};
-
-module.exports = {
-    plugins: [
-        new WebpackCleanPlugin([
-            'fileA.js',
-            'fileB.js'
-        ], {basePath: path.join(__dirname, 'dist'), removeMaps: true, forceDelete: true)}
+        ], {basePath: path.join(__dirname, 'dist'), forceDelete: true)}
     ]
 };
 ```

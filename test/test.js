@@ -3,11 +3,10 @@ import test from 'ava';
 const rewire = require('rewire');
 const WebpackClean = rewire('../index');
 
-let getFileList, addMapExtension, getContext, joinFilePath;
+let getFileList, getContext, joinFilePath;
 
 test.beforeEach(() => {
   getFileList = WebpackClean.__get__('getFileList');
-  addMapExtension = WebpackClean.__get__('addMapExtension');
   getContext = WebpackClean.__get__('getContext');
   joinFilePath = WebpackClean.__get__('joinFilePath');
 });
@@ -15,25 +14,25 @@ test.beforeEach(() => {
 test('WebpackClean constructor should receive optional params', t => {
   const files = ['files.js'];
   const basePath = 'dist';
-  const removeMaps = true;
+  const verbose = true;
 
-  const plugin = new WebpackClean(files, {basePath: basePath, removeMaps: removeMaps});
+  const plugin = new WebpackClean(files, { basePath: basePath, verbose: verbose });
   t.is(plugin.context, basePath);
-  t.truthy(plugin.removeMaps);
+  t.truthy(plugin.verbose);
 });
 
 test('WebpackClean constructor should use default options if options object is omitted', t => {
   const files = ['files.js'];
   const plugin = new WebpackClean(files);
   t.is(plugin.context, __dirname);
-  t.falsy(plugin.removeMaps);
+  t.falsy(plugin.verbose);
 });
 
 test('WebpackClean constructor should use the default options if options object is empty, ', t => {
   const files = ['files.js'];
   const plugin = new WebpackClean(files, {});
   t.is(plugin.context, __dirname);
-  t.falsy(plugin.removeMaps);
+  t.falsy(plugin.verbose);
 });
 
 test('getFilesList should return a one item list, if one single file is received', t => {
@@ -50,11 +49,6 @@ test('getFilesList should return an empty list', t => {
 
 test('getFilesList should return an empty list if no files provided', t => {
   t.deepEqual(getFileList(), []);
-});
-
-test('addMapExtension should return the map file name', t => {
-  t.is(addMapExtension('filename'), 'filename.map');
-  t.is(addMapExtension('file.name.js'), 'file.name.js.map');
 });
 
 test('getContext should return the context provided', t => {
