@@ -5,17 +5,17 @@
 
 [![Github release date](https://img.shields.io/github/release-date/pigmentolab/webpack-clean.svg?style=flat-square)](https://github.com/pigmentolab/webpack-clean/releases)
 [![Github release version](https://img.shields.io/github/release/pigmentolab/webpack-clean.svg?style=flat-square)](https://github.com/pigmentolab/webpack-clean/releases)
-[![npm release version](https://img.shields.io/npm/v/webpack-clean.svg?style=flat-square)](https://nodei.co/npm/webpack-clean)
-[![Github commits since last release](https://img.shields.io/github/commits-since/pigmentolab/webpack-clean/latest.svg?style=flat-square)](https://www.npmjs.com/package/webpack-clean)
+[![npm release version](https://img.shields.io/npm/v/webpack-glob-clean.svg?style=flat-square)](https://nodei.co/npm/webpack-glob-clean)
+[![Github commits since last release](https://img.shields.io/github/commits-since/pigmentolab/webpack-clean/latest.svg?style=flat-square)](https://www.npmjs.com/package/webpack-glob-clean)
 
-[![npm](https://nodei.co/npm/webpack-clean.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/webpack-clean)
+[![npm](https://nodei.co/npm/webpack-glob-clean.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/webpack-glob-clean)
 
-[![npm monthly downloads](https://img.shields.io/npm/dm/webpack-clean.svg?style=flat-square)](https://www.npmjs.com/package/webpack-clean)
-[![npm yearly downloads](https://img.shields.io/npm/dy/webpack-clean.svg?style=flat-square)](https://www.npmjs.com/package/webpack-clean)
+[![npm monthly downloads](https://img.shields.io/npm/dm/webpack-glob-clean.svg?style=flat-square)](https://www.npmjs.com/package/webpack-glob-clean)
+[![npm yearly downloads](https://img.shields.io/npm/dy/webpack-glob-clean.svg?style=flat-square)](https://www.npmjs.com/package/webpack-glob-clean)
 
 [![license](https://img.shields.io/github/license/pigmentolab/webpack-clean.svg?style=flat-square)](https://github.com/pigmentolab/webpack-clean/blob/master/LICENSE)
 
-## Webpack Clean
+## Webpack Glob Clean
 
 A webpack plugin to clean specified files after build
 
@@ -70,10 +70,20 @@ module.exports = {
 
 module.exports = {
     plugins: [
+        new WebpackCleanPlugin(
+            'dist/**/fileA.js',
+            {basePath: path.join(__dirname, './')}
+        )
+    ]
+};
+
+module.exports = {
+    plugins: [
         new WebpackCleanPlugin([
             'fileA.js',
-            'fileB.js'
-        ], {basePath: path.join(__dirname, 'dist'))}
+            'folder/**/*.map',
+            'dist/*.js'
+        ], {basePath: path.join(__dirname, 'dist')})
     ]
 };
 
@@ -82,7 +92,16 @@ module.exports = {
         new WebpackCleanPlugin([
             'fileA.js',
             'fileB.js'
-        ], {basePath: path.join(__dirname, 'dist'), forceDelete: true)}
+        ], {basePath: path.join(__dirname, 'dist'), verbose: true})
+    ]
+};
+
+module.exports = {
+    plugins: [
+        new WebpackCleanPlugin([
+            'fileA.js',
+            'fileB.js'
+        ], {basePath: path.join(__dirname, 'dist'), forceDelete: true})
     ]
 };
 ```
