@@ -36,7 +36,7 @@ new WebpackCleanPlugin(files: array|string, [ { [basePath: string], [removeMaps:
 
 * `files` - array of files or string for a single file relative to the `basePath` or to the `context` of your config (if the `basePath` param is not specified),
 * `basePath` (optional) - string - directory to be resolved to
-* `removeMaps` (optional) - boolean - specify if the `.map` files should be automatically removed. Disabled by default.
+* `verbose` (optional) - boolean - enable verbose logging. Disabled by default.
 * `forceDelete` (optional) - boolean - specify if the files should be force deleted in case of compile errors. If `forceDelete` is not enabled, the compile errors will be logged to `stdout` but the deletion of the files will not take place. Disabled by default.
 
 ### Usage
